@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
-      <body className={`${fontFamily.variable} min-h-full relative antialiased`}>
+      <body className={`${fontFamily.variable} h-full relative antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
