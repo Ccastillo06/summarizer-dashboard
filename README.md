@@ -20,7 +20,7 @@ The client is written in Next.js and TypeScript. It uses Shadcn UI for the UI co
 - Docker
 - Docker Compose
 
-### Running the application
+### Running the application with a simple script
 
 In case you want to run the application locally, you need to have Docker and Docker Compose installed. You can run it directly with the following command:
 
