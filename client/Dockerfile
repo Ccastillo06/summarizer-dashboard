@@ -16,7 +16,6 @@ FROM node:current-alpine
 WORKDIR /app
 
 # Only copy necessary runtime files from builder
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 
