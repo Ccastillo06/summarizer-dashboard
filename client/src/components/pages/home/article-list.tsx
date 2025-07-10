@@ -1,12 +1,11 @@
 import { List } from 'lucide-react';
-import { ArticleCard } from './article-card';
+
 import { getArticles } from '@/api/articles';
+import { SearchParamsFilters } from '@/types/filters';
+import { ArticleCard } from './article-card';
 
-export const ArticleList = async () => {
-  const articles = await getArticles({
-    cache: 'reload', // Force Next to save cache for this page server configuration until reload
-  });
-
+export const ArticleList = async ({ params }: { params: SearchParamsFilters }) => {
+  const articles = await getArticles(params);
   if (!articles.length) return null;
 
   return (

@@ -14,8 +14,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
+  DialogDescription,
 } from '@/components/ui/dialog';
-import { DialogClose, DialogDescription } from '@radix-ui/react-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export const ArticleSummary = ({ title, id }: Pick<Article, 'id' | 'title'>) => {

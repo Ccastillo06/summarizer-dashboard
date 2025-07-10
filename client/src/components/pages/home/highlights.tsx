@@ -2,11 +2,10 @@ import { Eye, Share, Star } from 'lucide-react';
 
 import { getHighlightedArticles } from '@/api/articles';
 import { HighlightCard } from './highlight-card';
+import { SearchParamsFilters } from '@/types/filters';
 
-export const Highlights = async () => {
-  const highlights = await getHighlightedArticles({
-    cache: 'reload', // Force Next to save cache for this page server configuration until reload
-  });
+export const Highlights = async ({ params }: { params: SearchParamsFilters }) => {
+  const highlights = await getHighlightedArticles(params);
 
   if (!highlights.mostViewed && !highlights.mostShared) return null;
 

@@ -1,5 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import {
+  ArticleSortOrder,
+  getArticleAuthorsFromDb,
   getArticleByIdFromDb,
   getArticlesFromDb,
   getHighlightedArticlesFromDb,
@@ -11,7 +13,12 @@ import { getArticleSummaryFromAI } from '../ai/services';
 
 export const getArticles = async (req: Request, res: Response, _next: NextFunction) => {
   try {
-    const articlesFromDb = await getArticlesFromDb();
+    const articlesFromDb = await getArticlesFromDb({
+      viewedSort: req.query.viewed as ArticleSortOrder,
+      sharedSort: req.query.shared as ArticleSortOrder,
+      authorFilter: req.query.author as string,
+    });
+
     const articles = articlesFromDb.map(({ article, author }) =>
       mergeArticleAndAuthor(article, author),
     );
@@ -25,7 +32,9 @@ export const getArticles = async (req: Request, res: Response, _next: NextFuncti
 
 export const getHighlightedArticles = async (req: Request, res: Response, _next: NextFunction) => {
   try {
-    const { mostShared, mostViewed } = await getHighlightedArticlesFromDb();
+    const { mostShared, mostViewed } = await getHighlightedArticlesFromDb({
+      authorFilter: req.query.author as string,
+    });
 
     const response = {
       mostViewed: mergeArticleAndAuthor(mostViewed.article, mostViewed.author),
@@ -60,5 +69,15 @@ export const getArticleSummary = async (req: Request, res: Response, _next: Next
   } catch (error) {
     logger.error('Error fetching article summary:', error);
     res.status(500).json({ message: 'Error fetching article summary' });
+  }
+};
+
+export const getArticleAuthors = async (req: Request, res: Response, _next: NextFunction) => {
+  try {
+    const authors = await getArticleAuthorsFromDb();
+    res.status(200).json(authors);
+  } catch (error) {
+    logger.error('Error fetching article authors:', error);
+    res.status(500).json({ message: 'Error fetching article authors' });
   }
 };
