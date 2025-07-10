@@ -1,0 +1,33 @@
+services:
+  server:
+    build:
+      context: ./server
+    container_name: summarizer-dashboard-backend
+    env_file:
+      - ./server/.env
+    ports:
+      - "4100:4100"
+    volumes:
+      - sqlite-data:/app/db
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./client
+    container_name: summarizer-dashboard-frontend
+    env_file:
+      - ./client/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  sqlite-data:

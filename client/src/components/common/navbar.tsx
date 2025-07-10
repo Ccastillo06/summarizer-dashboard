@@ -1,4 +1,5 @@
 import { FileText } from 'lucide-react';
+import { Suspense } from 'react';
 
 import { ThemeToggle } from '../theme/theme-toggle';
 import { ArticleFilter } from '../pages/home/article-filter';
@@ -17,8 +18,10 @@ export const Navbar = () => {
         <ThemeToggle />
       </div>
 
-      <div className='px-4'>
-        <ArticleFilter />
+      <div className="px-4">
+        <Suspense>
+          <ArticleFilter />
+        </Suspense>
       </div>
     </nav>
   );

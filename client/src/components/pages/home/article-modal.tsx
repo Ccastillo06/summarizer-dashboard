@@ -24,7 +24,7 @@ export const ArticleModal = ({
     <Dialog modal>
       <DialogTrigger asChild>{children}</DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] overflow-auto">
+      <DialogContent className="max-h-[90vh] overflow-auto bg-accent">
         <DialogHeader className="pt-4">
           <ArticleCardStats author={author} views={views} shares={shares} />
 
