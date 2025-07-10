@@ -32,3 +32,21 @@ export const getHighlightedArticlesFromDb = async () => {
     mostShared,
   };
 };
+
+export const getArticleByIdFromDb = async (id: number) => {
+  const article = await db
+    .select()
+    .from(articleTable)
+    .where(eq(articleTable.id, id))
+    .innerJoin(authorTable, eq(articleTable.author_id, authorTable.id))
+    .limit(1);
+
+  return article?.[0];
+};
+
+export const saveArticleSummaryToDb = async (articleId: number, summary: string) => {
+  await db
+    .update(articleTable)
+    .set({ summary, summary_date: new Date() })
+    .where(eq(articleTable.id, articleId));
+};

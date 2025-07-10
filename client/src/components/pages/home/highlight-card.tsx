@@ -1,7 +1,4 @@
-import {
-  ArticleCard,
-  type Props as ArticleCardProps,
-} from "@/components/pages/home/article-card";
+import { ArticleCard, type Props as ArticleCardProps } from '@/components/pages/home/article-card';
 
 type Props = {
   hightlightTitle: string;
@@ -12,8 +9,9 @@ export const HighlightCard = ({
   author,
   content,
   HighlightTitleIcon,
-  hightlightTitle,
   hightlight,
+  hightlightTitle,
+  id,
   shares,
   title,
   views,
@@ -27,6 +25,7 @@ export const HighlightCard = ({
       author={author}
       content={content}
       hightlight={hightlight}
+      id={id}
       shares={shares}
       title={title}
       views={views}

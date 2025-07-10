@@ -25,6 +25,7 @@ export const Highlights = async () => {
             hightlightTitle="Our most shared"
             HighlightTitleIcon={<Share />}
             hightlight="most-shared"
+            id={mostShared.id}
             title={mostShared.title}
             content={mostShared.content}
             author={mostShared.author}
@@ -38,6 +39,7 @@ export const Highlights = async () => {
             hightlightTitle="Our most viewed"
             HighlightTitleIcon={<Eye />}
             hightlight="most-viewed"
+            id={mostViewed.id}
             title={mostViewed.title}
             content={mostViewed.content}
             author={mostViewed.author}

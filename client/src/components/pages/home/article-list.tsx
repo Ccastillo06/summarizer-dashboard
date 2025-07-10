@@ -18,12 +18,13 @@ export const ArticleList = async () => {
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:max-w-[90%] mx-auto">
         {articles.map(({ id, title, content, author, views, shares }) => (
           <ArticleCard
-            key={id}
-            title={title}
-            content={content}
             author={author}
-            views={views}
+            content={content}
+            id={id}
+            key={id}
             shares={shares}
+            title={title}
+            views={views}
           />
         ))}
       </div>

@@ -7,15 +7,17 @@ export const authorTable = sqliteTable('author', {
 
 export const articleTable = sqliteTable('article', {
   id: integer('id').primaryKey({ autoIncrement: true }),
-  title: text('title'),
-  content: text('content'),
+  title: text('title').notNull(),
+  content: text('content').notNull(),
   author_id: integer('author_id')
     .notNull()
     .references(() => authorTable.id, {
       onDelete: 'cascade',
     }),
-  views: integer('views'),
-  shares: integer('shares'),
+  views: integer('views').default(0),
+  shares: integer('shares').default(0),
+  summary: text('summary'),
+  summary_date: integer({ mode: 'timestamp' }),
 });
 
 export type Article = typeof articleTable.$inferSelect;

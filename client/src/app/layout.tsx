@@ -1,20 +1,21 @@
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import type { Metadata } from "next";
-import { Noto_Sans } from "next/font/google";
+import { ThemeProvider } from '@/components/theme/theme-provider';
+import type { Metadata } from 'next';
+import { Noto_Sans } from 'next/font/google';
 
-import "./globals.css";
-import { Footer } from "@/components/common/footer";
-import { Navbar } from "@/components/common/navbar";
+import { Footer } from '@/components/common/footer';
+import { Navbar } from '@/components/common/navbar';
+import Providers from './providers';
+import './globals.css';
 
 const fontFamily = Noto_Sans({
-  variable: "--noto-sans",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--noto-sans',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Summarizer AI Dashboard",
-  description: "Summarize articles text with AI",
+  title: 'Summarizer AI Dashboard',
+  description: 'Summarize articles text with AI',
 };
 
 export default function RootLayout({
@@ -32,7 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          {children}
+          <Providers>{children}</Providers>
           <Footer />
         </ThemeProvider>
       </body>

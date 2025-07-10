@@ -1,26 +1,21 @@
-import { Eye, Share2, Wand2 } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { Article } from '@/api/types/articles';
 import {
   getBackgroundColor,
   getTextContentColor,
   getTitleColor,
 } from '@/components/pages/home/article-card/utils';
-import { Article } from '@/api/types/articles';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+
+import { ArticleCardStats } from '../article-card-stats';
+import { ArticleModal } from '../article-modal';
+import { ArticleSummary } from '../article-summary';
 
 type Hightlight = 'most-viewed' | 'most-shared';
-export type Props = {
-  title: string;
-  content: string;
-  author: Article['author'];
-  views: number;
-  shares: number;
-  hightlight?: Hightlight;
-};
+export type Props = { hightlight?: Hightlight } & Article;
 
-export const ArticleCard = ({ hightlight, title, content, author, views, shares }: Props) => {
+export const ArticleCard = ({ hightlight, title, content, author, views, shares, id }: Props) => {
   const backgroundColor = getBackgroundColor<Hightlight>(hightlight);
   const titleColor = getTitleColor<Hightlight>(hightlight);
   const textContentColor = getTextContentColor<Hightlight>(hightlight);
@@ -34,26 +29,13 @@ export const ArticleCard = ({ hightlight, title, content, author, views, shares 
           {title}
         </CardTitle>
 
-        <div
-          className={`flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-sm ${textContentColor}`}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-xs">By</span>
-            <span className={`font-medium ${titleColor}`}>{author.name}</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
-              <Eye className="w-4 h-4" />
-              <span>{views}</span>
-            </div>
-
-            <div className="flex items-center gap-1">
-              <Share2 className="w-4 h-4" />
-              <span>{shares}</span>
-            </div>
-          </div>
-        </div>
+        <ArticleCardStats
+          author={author}
+          views={views}
+          shares={shares}
+          textColor={textContentColor}
+          authorColor={titleColor}
+        />
 
         <Separator className="my-2 bg-purple-300" />
       </CardHeader>
@@ -65,10 +47,17 @@ export const ArticleCard = ({ hightlight, title, content, author, views, shares 
         />
 
         <div className="flex gap-2 justify-center">
-          <Button>Read more</Button>
-          <Button className="bg-purple-600 hover:bg-purple-800 text-white">
-            Generate Summary <Wand2 />
-          </Button>
+          <ArticleModal
+            title={title}
+            content={content}
+            author={author}
+            views={views}
+            shares={shares}
+          >
+            <Button>Read more</Button>
+          </ArticleModal>
+
+          <ArticleSummary id={id} title={title} />
         </div>
       </CardContent>
     </Card>

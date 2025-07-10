@@ -29,3 +29,8 @@ export const getHighlightedArticles = async (
     };
   }
 };
+
+export const getArticleSummary = async (id: number, options?: RequestInit): Promise<string> => {
+  const response = await apiClient({ endpoint: `/articles/${id}/summary`, options });
+  return response;
+};
