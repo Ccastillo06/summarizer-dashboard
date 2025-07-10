@@ -8,6 +8,8 @@ RUN npm install -g pnpm && pnpm install
 
 COPY . .
 
+ARG NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE
+ENV NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE=$NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE
 RUN pnpm build
 
 # Second stage: run the app with minimal dependencies

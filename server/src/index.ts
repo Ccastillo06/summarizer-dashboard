@@ -8,14 +8,11 @@ import logger from '@/libs/logger';
 import { CustomError, errorHandler } from '@/libs/error-handler';
 import { injectRoutes } from '@/libs/router';
 
-const port = process.env.PORT || 4200;
+const port = process.env.NODE_PORT || 4100;
 const app = express();
 
-app.use(
-  cors({
-    origin: process.env.NODE_ENV !== 'production' ? true : process.env.CLIENT_ORIGIN,
-  }),
-);
+// This is a demo project with no fixed origin, so we allow all origins for testing purposes
+app.use(cors());
 
 app.use(express.json());
 injectRoutes(app);
