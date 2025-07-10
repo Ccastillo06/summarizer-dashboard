@@ -1,32 +1,26 @@
-import { Eye, Share2, Wand2 } from "lucide-react";
+import { Eye, Share2, Wand2 } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import {
   getBackgroundColor,
   getTextContentColor,
   getTitleColor,
-} from "@/utils/article-card";
+} from '@/components/pages/home/article-card/utils';
+import { Article } from '@/api/types/articles';
 
-type Hightlight = "most-viewed" | "most-shared";
+type Hightlight = 'most-viewed' | 'most-shared';
 export type Props = {
   title: string;
   content: string;
-  author: string;
+  author: Article['author'];
   views: number;
   shares: number;
   hightlight?: Hightlight;
 };
 
-export const ArticleCard = ({
-  hightlight,
-  title,
-  content,
-  author,
-  views,
-  shares,
-}: Props) => {
+export const ArticleCard = ({ hightlight, title, content, author, views, shares }: Props) => {
   const backgroundColor = getBackgroundColor<Hightlight>(hightlight);
   const titleColor = getTitleColor<Hightlight>(hightlight);
   const textContentColor = getTextContentColor<Hightlight>(hightlight);
@@ -36,9 +30,7 @@ export const ArticleCard = ({
       className={`w-full max-w-md shadow-md rounded-2xl border-purple-300 border-2 gap-4 ${backgroundColor}`}
     >
       <CardHeader>
-        <CardTitle
-          className={`text-xl font-semibold line-clamp-2 min-h-[60px] ${titleColor}`}
-        >
+        <CardTitle className={`text-xl font-semibold line-clamp-2 min-h-[60px] ${titleColor}`}>
           {title}
         </CardTitle>
 
@@ -47,7 +39,7 @@ export const ArticleCard = ({
         >
           <div className="flex items-center gap-2">
             <span className="text-xs">By</span>
-            <span className={`font-medium ${titleColor}`}>{author}</span>
+            <span className={`font-medium ${titleColor}`}>{author.name}</span>
           </div>
 
           <div className="flex items-center gap-4">

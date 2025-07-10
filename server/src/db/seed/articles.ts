@@ -53,7 +53,7 @@ export const seedArticles = [
       <p>React Server Components (RSC) are shifting how developers architect web applications by moving rendering logic to the server. This allows for leaner client bundles and faster load times without sacrificing interactivity. Frameworks like Next.js are already leveraging RSC to offer hybrid rendering approaches.</p>
       <p>RSC introduces new design patterns for state management and data fetching, reducing the need for heavy client-side logic. Developers report performance improvements across the board, especially in content-heavy apps such as blogs, e-commerce platforms, and dashboards.</p>
       <p>While adoption is still early, the ecosystem is evolving quickly. Tools like Vercel and Remix are already testing RSC features, signaling a trend toward server-first thinking in modern frontend development.</p></div>`,
-    views: 9984,
+    views: 29984,
     shares: 382,
   },
   {
