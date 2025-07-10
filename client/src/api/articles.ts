@@ -6,6 +6,11 @@ import { buildUrlSearchParams } from './utils';
 const apiClientServerSide = getApiClient(process.env.NEXT_PUBLIC_API_BASE_URL_SERVER_SIDE!);
 const apiClientClientSide = getApiClient(process.env.NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE!);
 
+console.log({
+  apiClientServerSide: process.env.NEXT_PUBLIC_API_BASE_URL_SERVER_SIDE,
+  apiClientClientSide: process.env.NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE,
+});
+
 type ArticleRespose = Article[];
 export const getArticles = async (
   params: SearchParamsFilters,
