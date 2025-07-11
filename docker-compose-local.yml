@@ -3,10 +3,8 @@ services:
     build:
       context: ./server
     container_name: summarizer-dashboard-backend
-    environment:
-      - DB_FILE_NAME=${DB_FILE_NAME}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - CLIENT_ORIGIN=${CLIENT_ORIGIN}
+    env_file:
+      - ./server/.env
     ports:
       - "4100:4100"
     volumes:
@@ -17,11 +15,9 @@ services:
   client:
     build:
       context: ./client
-      args:
-        - NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE=${NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE}
     container_name: summarizer-dashboard-frontend
-    environment:
-      - NEXT_PUBLIC_API_BASE_URL_SERVER_SIDE=${NEXT_PUBLIC_API_BASE_URL_SERVER_SIDE}
+    env_file:
+      - ./client/.env
     ports:
       - "3000:3000"
     depends_on:

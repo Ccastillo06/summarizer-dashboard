@@ -22,10 +22,12 @@ The client is written in Next.js and TypeScript. It uses Shadcn UI for the UI co
 
 ### Running the application with a simple script
 
+First of all prepare the environment variables in the `.env` file for each the client and server folders. You can use all variables in `.env.dist` as a template for develop, but you will need to add the a `OPENAI_API_KEY` variable of your own to the server.
+
 In case you want to run the application locally, you need to have Docker and Docker Compose installed. You can run it directly with the following command:
 
 ```bash
-./deploy.sh
+./deploy-local.sh
 ```
 
 In case you have permission issues with the command, you can run:
@@ -39,13 +41,13 @@ chmod +x deploy.sh && ./deploy.sh
 Navigate to the root directory of the project and run the following command:
 
 ```bash
-docker-compose build
+docker-compose -f docker-compose-local.yml build --build-arg NEXT_PUBLIC_API_BASE_URL_CLIENT_SIDE=http://localhost:4100/api
 ```
 
 Then run the following command to start the application:
 
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose-local.yml up -d
 ```
 
 You can access the application at http://localhost:3000.
